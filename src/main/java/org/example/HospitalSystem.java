@@ -4,8 +4,37 @@ import java.util.*;
 
 public class HospitalSystem {
 
+    // findServicePrice Handler
+    private static Object findServicePrice(ArrayList<Service> services, String serviceName) {
+        for (Service service : services) {
+            if (service.getServiceName().equals(serviceName)) {
+                return service.getServicePrice();
+            }
+        }
+        return null;
+    }
+
+    // findPatient Handler
+    private static Object findPatient(ArrayList<Patient> patients, String patientId) {
+        // get name or get bill
+        for (Patient patient : patients) {
+            if (patient.getId().equals(patientId)) {
+                return patient.getName();
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        ArrayList<Service> services = new ArrayList<>();
+        services.add( new Service("X-Ray", 500));
+        services.add(new Service("Surgery", 12000));
+        services.add(new Service("Consultation", 700));
+
+
+
         // Setup objects we need
         // patient & service maybe?
 

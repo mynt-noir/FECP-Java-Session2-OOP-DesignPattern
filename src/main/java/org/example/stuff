@@ -1,0 +1,66 @@
+package org.example;
+
+public class Service {
+    private String serviceName;
+    private double servicePrice;
+
+    private Service (String serviceName, double servicePrice) {
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public double getServicePrice() {
+        return servicePrice;
+    }
+
+    public void setServicePrice(double servicePrice) {
+        this.servicePrice = servicePrice;
+    }
+}
+
+
+package org.example;
+
+public class Patient {
+    private String name;
+    private String id;
+    private Service[] services;
+
+    private Patient (String name, String id, Service[] services) {
+        this.name = name;
+        this.id = id;
+        this.services = services;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Service[] getServices() {
+        return services;
+    }
+
+    public void setServices(Service[] services) {
+        this.services = services;
+    }
+}
