@@ -52,6 +52,7 @@ public class HospitalSystem {
         // patient & service maybe?
 
         while (true) {
+
             // Main Menu
             System.out.println("\n=== Hospital Billing System ===");
             System.out.println("1. Register Patient");
@@ -63,9 +64,11 @@ public class HospitalSystem {
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character left by nextInt()
 
+
             switch (choice) {
                 case 1:
                     // --- Register Patient ---
+
                     System.out.println("\n--- Register Patient ---");
                     System.out.print("Enter patient name: ");
                     String patientName = scanner.nextLine();
@@ -81,47 +84,17 @@ public class HospitalSystem {
                     break;
 
                 case 2:
-                    // --- Add Service ---
-                    System.out.println("\n--- Add Service ---");
-                    System.out.print("Enter patient ID to add service to: ");
-                    patientId = scanner.nextLine();
-
-                    Patient patientToUpdate = findPatientObject(patients, patientId);
-
-                    if (patientToUpdate != null) {
-                        Service selectedService = null;
-                        while (selectedService == null) {
-                            System.out.println("\nAvailable Services:");
-                            for (int i = 0; i < services.size(); i++) {
-                                Service s = services.get(i);
-                                System.out.println((i + 1) + ". " + s.getServiceName() + " (Price: " + String.format("%.2f", s.getServicePrice()) + ")");
-                            }
-                            System.out.print("Select a service by number: ");
-                            int serviceChoiceNum = -1;
-                            try {
-                                serviceChoiceNum = scanner.nextInt();
-                                scanner.nextLine();
-                                if (serviceChoiceNum > 0 && serviceChoiceNum <= services.size()) {
-                                    selectedService = services.get(serviceChoiceNum - 1);
-                                } else {
-                                    System.out.println("Invalid service number. Please try again.");
-                                }
-                            } catch (InputMismatchException e) {
-                                System.out.println("Invalid input. Please enter a number.");
-                                scanner.nextLine();
-                            }
-                        }
-                        patientToUpdate.addService(selectedService);
-                        System.out.println("Service '" + selectedService.getServiceName() + "' added to patient '" + patientToUpdate.getName() + "'.");
-                    } else {
-                        System.out.println("Patient with ID '" + patientId + "' not found.");
-                    }
+                    // --- Add Service --
+                    String serviceToAdd = scanner.nextLine();
+                    //get price of service
+                    HospitalService service = ServiceFactory.getService(serviceToAdd);
+                    double serviceCost = service != null ? service.getCost() : 0;
+                    //add serviceCost to total cost
                     break;
 
 
                 case 3:
                     // --- Compute Bill ---
-
                     break;
 
                 case 4:
