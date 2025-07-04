@@ -96,17 +96,21 @@ public class HospitalSystem {
 
                 case 2:
                     // --- Add Service ---
-                    System.out.println("Patient ID: ");
+                    System.out.print("Patient ID: ");
                     String id = scanner.nextLine();
                     boolean isPatientIdExisting = patients.stream().anyMatch(patient -> patient.getId().equals(id));
                     if(!isPatientIdExisting){
                         System.out.println("Patient ID does not exist");
                         return;
                     }
+                    System.out.print("Select service to add: ");
                     String serviceToAdd = scanner.nextLine();
                     //get price of service
                     HospitalService service = ServiceFactory.getService(serviceToAdd);
                     double serviceCost = service != null ? service.getCost() : 0;
+                    if(serviceCost != 0){
+                        System.out.println("Service added to patient bill.");
+                    }
                     //add serviceCost to total cost
                     break;
 
