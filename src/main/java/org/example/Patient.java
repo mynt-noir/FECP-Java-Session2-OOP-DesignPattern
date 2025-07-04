@@ -1,14 +1,16 @@
 package org.example;
 
+import java.util.*;
+import java.util.List;
+
 public class Patient {
     private String name;
     private String id;
-    private Service[] services;
+    private List<Service> services = new ArrayList<>();
 
-    public Patient (String name, String id, Service[] services) {
+    public Patient (String name, String id) {
         this.name = name;
         this.id = id;
-        this.services = services;
     }
 
     public String getName() {
@@ -27,11 +29,9 @@ public class Patient {
         this.id = id;
     }
 
-    public Service[] getServices() {
-        return services;
+    public void addService(Service service) {
+        this.services.add(service);
     }
 
-    public void setServices(Service[] services) {
-        this.services = services;
-    }
+    //redo print services.
 }
