@@ -52,6 +52,10 @@ public class HospitalSystemTest {
     public void addServiceValidService() {
 
         patients.add;
+    void addServiceValidService() {
+        Patient patient = new Patient("Bob", "P102");
+        patient.addService(new Service("X-Ray", 500));
+
 
     }
 
@@ -59,10 +63,16 @@ public class HospitalSystemTest {
     @Test
     public void addServiceInvalidService() {
 
+    void addServiceInvalidService() {
+        Patient patient = new Patient("Charlie", "P103");
+        patient.addService(new Service("Invalid Service", 500));
     }
 
     @Test
     void computeBillHmo() {
+        Patient patient = new Patient("Delta", "P104");
+
+
 
     }
 
