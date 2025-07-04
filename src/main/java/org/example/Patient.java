@@ -5,7 +5,7 @@ public class Patient {
     private String id;
     private Service[] services;
 
-    private Patient (String name, String id, Service[] services) {
+    public Patient (String name, String id, Service[] services) {
         this.name = name;
         this.id = id;
         this.services = services;
