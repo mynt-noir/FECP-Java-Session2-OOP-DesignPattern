@@ -25,6 +25,17 @@ public class HospitalSystem {
         return null;
     }
 
+    // findPatient Handler (returns the patient object)
+    private static Patient findPatientObject(ArrayList<Patient> patients, String patientId) {
+        // get name or get bill
+        for (Patient patient : patients) {
+            if (patient.getId().equals(patientId)) {
+                return patient;
+            }
+        }
+        return null;
+    }
+
     private static ArrayList<Patient> patients = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -62,7 +73,7 @@ public class HospitalSystem {
                     String patientId = scanner.nextLine();
 
                     // create a new patient without any initial services.
-                    Patient newPatient = new Patient(patientName, patientId, services);
+                    Patient newPatient = new Patient(patientName, patientId);
                     patients.add(newPatient); // Add patient to the list
 
                     System.out.println("\nPatient registered: " + patientName + " (ID: " + patientId + ")");
@@ -71,8 +82,42 @@ public class HospitalSystem {
 
                 case 2:
                     // --- Add Service ---
+                    System.out.println("\n--- Add Service ---");
+                    System.out.print("Enter patient ID to add service to: ");
+                    patientId = scanner.nextLine();
 
+                    Patient patientToUpdate = findPatientObject(patients, patientId);
+
+                    if (patientToUpdate != null) {
+                        Service selectedService = null;
+                        while (selectedService == null) {
+                            System.out.println("\nAvailable Services:");
+                            for (int i = 0; i < services.size(); i++) {
+                                Service s = services.get(i);
+                                System.out.println((i + 1) + ". " + s.getServiceName() + " (Price: " + String.format("%.2f", s.getServicePrice()) + ")");
+                            }
+                            System.out.print("Select a service by number: ");
+                            int serviceChoiceNum = -1;
+                            try {
+                                serviceChoiceNum = scanner.nextInt();
+                                scanner.nextLine();
+                                if (serviceChoiceNum > 0 && serviceChoiceNum <= services.size()) {
+                                    selectedService = services.get(serviceChoiceNum - 1);
+                                } else {
+                                    System.out.println("Invalid service number. Please try again.");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("Invalid input. Please enter a number.");
+                                scanner.nextLine();
+                            }
+                        }
+                        patientToUpdate.addService(selectedService);
+                        System.out.println("Service '" + selectedService.getServiceName() + "' added to patient '" + patientToUpdate.getName() + "'.");
+                    } else {
+                        System.out.println("Patient with ID '" + patientId + "' not found.");
+                    }
                     break;
+
 
                 case 3:
                     // --- Compute Bill ---
