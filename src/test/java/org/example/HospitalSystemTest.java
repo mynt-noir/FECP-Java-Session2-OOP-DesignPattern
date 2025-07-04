@@ -40,6 +40,7 @@ class HospitalSystemTest {
     @Test
     void addServiceValidService() {
         Patient patient = new Patient("Bob", "P102");
+        patient.addService(new Service("X-Ray", 500));
 
 
     }
@@ -48,12 +49,12 @@ class HospitalSystemTest {
     @Test
     void addServiceInvalidService() {
         Patient patient = new Patient("Charlie", "P103");
-
-
+        patient.addService(new Service("Invalid Service", 500));
     }
 
     @Test
     void computeBillHmo() {
+        Patient patient = new Patient("Delta", "P104");
 
 
 
