@@ -126,14 +126,13 @@ public class HospitalSystem {
 
                         // Get insurance type
                         String insuranceType = "";
-                        while (true) {
-                            System.out.print("Enter insurance type (HMO, Senior, Cash): ");
-                            insuranceType = scanner.nextLine().trim().toLowerCase(); // Read input and normalize
-                            if (insuranceType.equals("hmo") || insuranceType.equals("senior") || insuranceType.equals("cash")) {
-                                PaymentType paymentType = PaymentTypeFactory.getService(type) ;
-                                finalBill = paymentType.getCost(billNoDiscount);
-                                System.out.println("Invalid insurance type. Please enter 'HMO', 'Senior', or 'Cash'.");
-                            }
+                        System.out.print("Enter insurance type (HMO, Senior, Cash): ");
+
+                        insuranceType = scanner.nextLine().trim().toLowerCase(); // Read input and normalize
+                        if (insuranceType.equals("hmo") || insuranceType.equals("senior") || insuranceType.equals("cash")) {
+                            PaymentType paymentType = PaymentTypeFactory.getService(insuranceType) ;
+                            finalBill = paymentType.getCost(billNoDiscount);
+                            System.out.println("Invalid insurance type. Please enter 'HMO', 'Senior', or 'Cash'.");
                         }
 
                         // Empty switch case for insurance types
