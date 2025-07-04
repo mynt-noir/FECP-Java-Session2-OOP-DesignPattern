@@ -52,7 +52,7 @@ public class HospitalSystemTest {
         double expected = 500 * 0.60;
         PaymentType paymentType = PaymentTypeFactory.getService("hmo");
         Assert.assertNotNull(paymentType);
-        assertEquals(expected, paymentType.getCost(patient.getTotalBill()));
+        assertEquals(expected, paymentType.getCost(patient.getTotalBill()), 0.001);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class HospitalSystemTest {
         double expected = 500;
         PaymentType paymentType = PaymentTypeFactory.getService("cash");
         Assert.assertNotNull(paymentType);
-        assertEquals(expected, paymentType.getCost(patient.getTotalBill()));
+        assertEquals(expected, paymentType.getCost(patient.getTotalBill()), 0.001);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class HospitalSystemTest {
         double expected = 500 * 0.80;
         PaymentType paymentType = PaymentTypeFactory.getService("senior");
         Assert.assertNotNull(paymentType);
-        assertEquals(expected, paymentType.getCost(patient.getTotalBill()));
+        assertEquals(expected, paymentType.getCost(patient.getTotalBill()), 0.001);
     }
 
     @Test
