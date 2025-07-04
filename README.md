@@ -14,6 +14,13 @@ The project is a Java-based Hospital Billing System. The system features a menu 
 <br>
 
 **Project Structure:**
+<img src="diagram.png"> <br> 
+
+HospitalSystem - contains the main method <br/>
+PaymentTypeFactory - factory class for creating a payment type class <br/>
+PaymentType - interface for payment types (cash, hmo, senior) <br/>
+Patient - stores patient details <br/>
+Service - stores service names and prices <br/>
 
 **Screenshots:**
 <img src="r1.png"> <br>
