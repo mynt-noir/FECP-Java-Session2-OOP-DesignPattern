@@ -25,6 +25,17 @@ public class HospitalSystem {
         return null;
     }
 
+    // findPatient Handler (returns the patient object)
+    private static Patient findPatientObject(ArrayList<Patient> patients, String patientId) {
+        // get name or get bill
+        for (Patient patient : patients) {
+            if (patient.getId().equals(patientId)) {
+                return patient;
+            }
+        }
+        return null;
+    }
+
     private static ArrayList<Patient> patients = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -65,7 +76,9 @@ public class HospitalSystem {
                     String patientId = scanner.nextLine();
 
                     // create a new patient without any initial services.
+
                     Patient newPatient = new Patient(patientName, patientId, services);
+
                     patients.add(newPatient); // Add patient to the list
 
                     System.out.println("\nPatient registered: " + patientName + " (ID: " + patientId + ")");
@@ -91,6 +104,7 @@ public class HospitalSystem {
                     }
                     //add serviceCost to total cost
                     break;
+
 
                 case 3:
                     // --- Compute Bill ---
