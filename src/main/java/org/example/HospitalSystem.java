@@ -86,28 +86,51 @@ public class HospitalSystem {
                     break;
 
                 case 2:
-                    // --- Add Service ---
-                    System.out.print("Patient ID: ");
-                    String id = scanner.nextLine();
-                    boolean isPatientIdExisting = patients.stream().anyMatch(patient -> patient.getId().equals(id));
-                    if(!isPatientIdExisting){
-                        System.out.println("Patient ID does not exist");
-                        return;
-                    }
-                    System.out.print("Select service to add: ");
-                    String serviceToAdd = scanner.nextLine();
-                    //get price of service
-                    HospitalService service = ServiceFactory.getService(serviceToAdd);
-                    double serviceCost = service != null ? service.getCost() : 0;
-                    if(serviceCost != 0){
-                        System.out.println("Service added to patient bill.");
-                    }
-                    //add serviceCost to total cost
-                    break;
+                    System.out.println("\n--- Add Service ---");
+                    System.out.print("Enter patient ID to add service to: ");
+                    patientId = scanner.nextLine();
 
+                    Patient patientToUpdate = findPatientObject(patients, patientId);
+
+                    if (patientToUpdate != null) {
+                        Service selectedService = null;
+                        while (selectedService == null) {
+                            System.out.println("\nAvailable Services:");
+                            for (int i = 0; i < services.size(); i++) {
+                                Service s = services.get(i);
+                                System.out.println((i + 1) + ". " + s.getServiceName() + " (Price: " + String.format("%.2f", s.getServicePrice()) + ")");
+                            }
+                            System.out.print("Select a service by number: ");
+                            int serviceChoiceNum = -1;
+                            try {
+                                serviceChoiceNum = scanner.nextInt();
+                                scanner.nextLine();
+                                if (serviceChoiceNum > 0 && serviceChoiceNum <= services.size()) {
+                                    selectedService = services.get(serviceChoiceNum - 1);
+                                } else {
+                                    System.out.println("Invalid service number. Please try again.");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("Invalid input. Please enter a number.");
+                                scanner.nextLine();
+                            }
+                        }
+                        patientToUpdate.addService(selectedService);
+                        System.out.println("Service '" + selectedService.getServiceName() + "' added to patient '" + patientToUpdate.getName() + "'.");
+                    } else {
+                        System.out.println("Patient with ID '" + patientId + "' not found.");
+                    }
+                    break;
 
                 case 3:
                     // --- Compute Bill ---
+                    System.out.print("Insurance Type (hmo/cash/senior): ");
+                    String type = scanner.nextLine().toLowerCase();
+
+                    if(type.equals("hmo") || type.equals("cash") || type.equals("senior")){
+                        PaymentType paymentType = PaymentTypeFactory.getService(type);
+                        //paymentType.getCost(totalCost)
+                    }
                     break;
 
                 case 4:
