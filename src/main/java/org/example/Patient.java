@@ -5,7 +5,16 @@ import java.util.*; // Keep both util imports for List and ArrayList
 public class Patient {
     private String name;
     private String id;
-    private List<Service> services = new ArrayList<>(); // Initialize to avoid NullPointerException
+
+    private List<Service> services = new ArrayList<>(); 
+
+    private ArrayList<Service> services;
+
+    public Patient (String name, String id, ArrayList<Service> services) {
+        this.name = name;
+        this.id = id;
+    }
+
 
     public Patient (String name, String id) {
         this.name = name;
@@ -28,9 +37,18 @@ public class Patient {
         this.id = id;
     }
 
+    public ArrayList<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(ArrayList<Service> services) {
+        this.services = services;
+    }
+
     public void addService(Service service) {
         this.services.add(service);
     }
+
 
     // New method: printServices
     public void printServices() {
@@ -53,4 +71,7 @@ public class Patient {
         }
         return total;
     }
+
+
 }
+

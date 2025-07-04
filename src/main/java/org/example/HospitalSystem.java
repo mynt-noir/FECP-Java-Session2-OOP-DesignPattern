@@ -14,17 +14,6 @@ public class HospitalSystem {
         return null;
     }
 
-    // findPatient Handler
-    private static Object findPatient(ArrayList<Patient> patients, String patientId) {
-        // get name or get bill
-        for (Patient patient : patients) {
-            if (patient.getId().equals(patientId)) {
-                return patient.getName();
-            }
-        }
-        return null;
-    }
-
     // findPatient Handler (returns the patient object)
     private static Patient findPatientObject(ArrayList<Patient> patients, String patientId) {
         // get name or get bill
@@ -46,10 +35,6 @@ public class HospitalSystem {
         services.add(new Service("Surgery", 12000));
         services.add(new Service("Consultation", 700));
 
-
-
-        // Setup objects we need
-        // patient & service maybe?
 
         while (true) {
 
@@ -76,7 +61,9 @@ public class HospitalSystem {
                     String patientId = scanner.nextLine();
 
                     // create a new patient without any initial services.
-                    Patient newPatient = new Patient(patientName, patientId);
+
+                    Patient newPatient = new Patient(patientName, patientId, services);
+
                     patients.add(newPatient); // Add patient to the list
 
                     System.out.println("\nPatient registered: " + patientName + " (ID: " + patientId + ")");
@@ -120,12 +107,13 @@ public class HospitalSystem {
                     }
                     break;
 
-
                 case 3:
                     // --- Compute Bill ---
+
                     System.out.println("\n--- Compute Bill ---");
                     System.out.print("Enter patient ID to compute bill for: ");
                     patientId = scanner.nextLine();
+                    double finalBill = 0;
 
                     Patient patientForBill = findPatientObject(patients, patientId); // Corrected to findPatient
 
@@ -142,8 +130,8 @@ public class HospitalSystem {
                             System.out.print("Enter insurance type (HMO, Senior, Cash): ");
                             insuranceType = scanner.nextLine().trim().toLowerCase(); // Read input and normalize
                             if (insuranceType.equals("hmo") || insuranceType.equals("senior") || insuranceType.equals("cash")) {
-                                break; // Valid input, exit loop
-                            } else {
+                                PaymentType paymentType = PaymentTypeFactory.getService(type) ;
+                                finalBill = paymentType.getCost(billNoDiscount);
                                 System.out.println("Invalid insurance type. Please enter 'HMO', 'Senior', or 'Cash'.");
                             }
                         }
@@ -168,9 +156,10 @@ public class HospitalSystem {
                                 break;
                         }
                         // The final bill calculation based on the discount will follow here later
-                        // System.out.printf("Final Bill: %.2f\n", finalBill); // This will be added later
+                        System.out.printf("Final Bill: %.2f\n", finalBill); // This will be added later
                     } else {
                         System.out.println("Patient with ID '" + patientId + "' not found.");
+
                     }
                     break;
 
