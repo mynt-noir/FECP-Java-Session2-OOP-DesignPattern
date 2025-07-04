@@ -112,7 +112,7 @@ public class HospitalSystem {
 
                     System.out.println("\n--- Compute Bill ---");
                     System.out.print("Enter patient ID to compute bill for: ");
-                    patientId = scanner.nextLine();
+                    patientId = scanner.next();
                     double finalBill = 0;
                     double billNoDiscount = 0;
 
