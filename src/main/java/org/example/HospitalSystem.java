@@ -14,17 +14,6 @@ public class HospitalSystem {
         return null;
     }
 
-    // findPatient Handler
-    private static Object findPatient(ArrayList<Patient> patients, String patientId) {
-        // get name or get bill
-        for (Patient patient : patients) {
-            if (patient.getId().equals(patientId)) {
-                return patient.getName();
-            }
-        }
-        return null;
-    }
-
     // findPatient Handler (returns the patient object)
     private static Patient findPatientObject(ArrayList<Patient> patients, String patientId) {
         // get name or get bill
@@ -46,10 +35,6 @@ public class HospitalSystem {
         services.add(new Service("Surgery", 12000));
         services.add(new Service("Consultation", 700));
 
-
-
-        // Setup objects we need
-        // patient & service maybe?
 
         while (true) {
 

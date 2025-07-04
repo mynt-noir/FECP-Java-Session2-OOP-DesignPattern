@@ -5,7 +5,6 @@ import java.util.*;
 public class Patient {
     private String name;
     private String id;
-
     private ArrayList<Service> services;
 
     public Patient (String name, String id, ArrayList<Service> services) {
