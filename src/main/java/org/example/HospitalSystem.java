@@ -128,8 +128,8 @@ public class HospitalSystem {
                     String type = scanner.nextLine().toLowerCase();
 
                     if(type.equals("hmo") || type.equals("cash") || type.equals("senior")){
-                        PaymentType paymentType = PaymentTypeFactory.getService(type);
-                        //paymentType.getCost(totalCost)
+                        PaymentType paymentType = PaymentTypeFactory.getService(type) ;
+                        //paymentType.getCost(totalCost )
                     }
                     break;
 
