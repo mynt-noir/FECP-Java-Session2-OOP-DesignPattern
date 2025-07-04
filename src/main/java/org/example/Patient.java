@@ -6,7 +6,9 @@ public class Patient {
     private String name;
     private String id;
 
-    private ArrayList<Service> services;
+
+    private ArrayList<Service> services = new ArrayList<>();
+
 
     public Patient (String name, String id, ArrayList<Service> services) {
         this.name = name;

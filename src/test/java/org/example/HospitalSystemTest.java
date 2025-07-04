@@ -88,8 +88,21 @@ public class HospitalSystemTest {
 
     @Test
     void validateServiceCost() {
-//        s.getServiceName.equals("X-Ray")
-//                assert.equals(s.getServicePrice, 500);
+        Service xRay = services.getFirst();
+        assertEquals("X-Ray", xRay.getServiceName());
+        assertEquals(500, xRay.getServicePrice(), 0.001);
+
+        Service surgery = services.get(1);
+        assertEquals("Surgery", surgery.getServiceName());
+        assertEquals(12000, surgery.getServicePrice(), 0.001);
+
+        Service consultation = services.get(2);
+        assertEquals("Consultation", consultation.getServiceName());
+        assertEquals(700, consultation.getServicePrice(), 0.001);
+
+        Service newTestService = new Service("Blood Test", 250);
+        assertEquals("Blood Test", newTestService.getServiceName());
+        assertEquals(250, newTestService.getServicePrice(), 0.001);
     }
 
 }
