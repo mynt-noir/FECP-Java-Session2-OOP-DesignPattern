@@ -1,9 +1,8 @@
 package org.example;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
@@ -51,7 +50,7 @@ public class HospitalSystemTest {
         patient.addService(new Service("X-Ray", 500));
         double expected = 500 * 0.60;
         PaymentType paymentType = PaymentTypeFactory.getService("hmo");
-        Assert.assertNotNull(paymentType);
+        assertNotNull(paymentType);
         assertEquals(expected, paymentType.getCost(patient.getTotalBill()), 0.001);
     }
 
@@ -61,7 +60,7 @@ public class HospitalSystemTest {
         patient.addService(new Service("X-Ray", 500));
         double expected = 500;
         PaymentType paymentType = PaymentTypeFactory.getService("cash");
-        Assert.assertNotNull(paymentType);
+        assertNotNull(paymentType);
         assertEquals(expected, paymentType.getCost(patient.getTotalBill()), 0.001);
     }
 
@@ -71,28 +70,25 @@ public class HospitalSystemTest {
         patient.addService(new Service("X-Ray", 500));
         double expected = 500 * 0.80;
         PaymentType paymentType = PaymentTypeFactory.getService("senior");
-        Assert.assertNotNull(paymentType);
+        assertNotNull(paymentType);
         assertEquals(expected, paymentType.getCost(patient.getTotalBill()), 0.001);
     }
 
     @Test
     public void validateServiceCost() {
-        System.out.println(services);
-//        Service xRay = services.getFirst();
-//        assertEquals("X-Ray", xRay.getServiceName());
-//        assertEquals(500, xRay.getServicePrice(), 0.001);
-//
-//        Service surgery = services.get(1);
-//        assertEquals("Surgery", surgery.getServiceName());
-//        assertEquals(12000, surgery.getServicePrice(), 0.001);
-//
-//        Service consultation = services.get(2);
-//        assertEquals("Consultation", consultation.getServiceName());
-//        assertEquals(700, consultation.getServicePrice(), 0.001);
-//
-//        Service newTestService = new Service("Blood Test", 250);
-//        assertEquals("Blood Test", newTestService.getServiceName());
-//        assertEquals(250, newTestService.getServicePrice(), 0.001);
-    }
+        assertNotNull(services, "Services list should not be null after setUp()");
+        assertEquals(3, services.size(), "Services list should contain 3 elements");
 
+        Service xRay = services.get(0); // Assuming order is X-Ray, Surgery, Consultation
+        assertEquals("X-Ray", xRay.getServiceName());
+        assertEquals(500, xRay.getServicePrice(), 0.001);
+
+        Service surgery = services.get(1);
+        assertEquals("Surgery", surgery.getServiceName());
+        assertEquals(12000, surgery.getServicePrice(), 0.001);
+
+        Service consultation = services.get(2);
+        assertEquals("Consultation", consultation.getServiceName());
+        assertEquals(700, consultation.getServicePrice(), 0.001);
+    }
 }
