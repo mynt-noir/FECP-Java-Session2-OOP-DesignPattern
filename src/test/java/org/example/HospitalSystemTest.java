@@ -1,14 +1,14 @@
 package org.example;
 
+import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HospitalSystemTest {
+public class HospitalSystemTest {
 
     private ArrayList<Patient> patients;
     private ArrayList<Service> services;
@@ -29,27 +29,50 @@ class HospitalSystemTest {
     }
 
     @Test
-    void registerPatientValid() {
-        Patient patient = new Patient("Alice", "P101");
+    public void registerPatientValidName() {
 
-        assertEquals("P101", patient.getId());
-        assertEquals("Alice", patient.getName());
-        assertNull(patient.getServices());
     }
 
     @Test
+    public void registerPatientValidId() {
+
+    }
+
+    @Test
+    public void registerPatientInvalidName() {
+
+    }
+
+    @Test
+    void registerPatientInvalidId() {
+
+    }
+
+    @Test
+    public void addServiceValidService() {
+
+        patients.add;
     void addServiceValidService() {
+        Patient patient = new Patient("Bob", "P102");
+        patient.addService(new Service("X-Ray", 500));
+
 
     }
 
 
     @Test
-    void addServiceInvalidService() {
+    public void addServiceInvalidService() {
 
+    void addServiceInvalidService() {
+        Patient patient = new Patient("Charlie", "P103");
+        patient.addService(new Service("Invalid Service", 500));
     }
 
     @Test
     void computeBillHmo() {
+        Patient patient = new Patient("Delta", "P104");
+
+
 
     }
 

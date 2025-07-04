@@ -9,6 +9,7 @@ public class Patient {
 
     private ArrayList<Service> services = new ArrayList<>();
 
+
     public Patient (String name, String id, ArrayList<Service> services) {
         this.name = name;
         this.id = id;
