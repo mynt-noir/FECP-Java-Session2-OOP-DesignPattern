@@ -30,7 +30,11 @@ public class HospitalSystemTest {
 
     @Test
     public void registerPatientValid() {
+        Patient patient = new Patient("Alice", "P101");
 
+        assertEquals("P101", patient.getId());
+        assertEquals("Alice", patient.getName());
+        assertNull(patient.getServices());
     }
 
 
