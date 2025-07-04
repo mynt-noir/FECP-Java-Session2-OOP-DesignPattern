@@ -109,12 +109,57 @@ public class HospitalSystem {
 
                 case 3:
                     // --- Compute Bill ---
-                    System.out.print("Insurance Type (hmo/cash/senior): ");
-                    String type = scanner.nextLine().toLowerCase();
 
-                    if(type.equals("hmo") || type.equals("cash") || type.equals("senior")){
-                        PaymentType paymentType = PaymentTypeFactory.getService(type) ;
-                        //paymentType.getCost(totalCost )
+                    System.out.println("\n--- Compute Bill ---");
+                    System.out.print("Enter patient ID to compute bill for: ");
+                    patientId = scanner.nextLine();
+                    double finalBill = 0;
+
+                    Patient patientForBill = findPatientObject(patients, patientId); // Corrected to findPatient
+
+                    if (patientForBill != null) {
+                        System.out.println("\n--- Bill for Patient: " + patientForBill.getName() + " (ID: " + patientForBill.getId() + ") ---");
+                        patientForBill.printServices();
+
+                        double billNoDiscount = patientForBill.getTotalBill();
+                        System.out.printf("Total Bill (without discount): %.2f\n", billNoDiscount); //maybe we have to delete this later once we add discounted price/
+
+                        // Get insurance type
+                        String insuranceType = "";
+                        while (true) {
+                            System.out.print("Enter insurance type (HMO, Senior, Cash): ");
+                            insuranceType = scanner.nextLine().trim().toLowerCase(); // Read input and normalize
+                            if (insuranceType.equals("hmo") || insuranceType.equals("senior") || insuranceType.equals("cash")) {
+                                PaymentType paymentType = PaymentTypeFactory.getService(type) ;
+                                finalBill = paymentType.getCost(billNoDiscount);
+                                System.out.println("Invalid insurance type. Please enter 'HMO', 'Senior', or 'Cash'.");
+                            }
+                        }
+
+                        // Empty switch case for insurance types
+                        switch (insuranceType) {
+                            case "hmo":
+                                // Logic for HMO discount will go here
+                                System.out.println("Applying HMO discount...");
+                                break;
+                            case "senior":
+                                // Logic for Senior discount will go here
+                                System.out.println("Applying Senior discount...");
+                                break;
+                            case "cash":
+                                // Logic for Cash payment (no discount) will go here
+                                System.out.println("Processing Cash payment...");
+                                break;
+                            default:
+                                // This case should ideally not be reached due to the while loop validation
+                                System.out.println("An unexpected error occurred with insurance type.");
+                                break;
+                        }
+                        // The final bill calculation based on the discount will follow here later
+                        System.out.printf("Final Bill: %.2f\n", finalBill); // This will be added later
+                    } else {
+                        System.out.println("Patient with ID '" + patientId + "' not found.");
+
                     }
                     break;
 
