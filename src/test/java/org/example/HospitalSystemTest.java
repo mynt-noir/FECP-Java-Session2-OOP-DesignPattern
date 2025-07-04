@@ -39,17 +39,23 @@ class HospitalSystemTest {
 
     @Test
     void addServiceValidService() {
+        Patient patient = new Patient("Bob", "P102");
+
 
     }
 
 
     @Test
     void addServiceInvalidService() {
+        Patient patient = new Patient("Charlie", "P103");
+
 
     }
 
     @Test
     void computeBillHmo() {
+
+
 
     }
 
