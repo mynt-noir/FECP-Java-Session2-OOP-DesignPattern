@@ -39,6 +39,7 @@ public class HospitalSystem {
         // patient & service maybe?
 
         while (true) {
+
             // Main Menu
             System.out.println("\n=== Hospital Billing System ===");
             System.out.println("1. Register Patient");
@@ -50,19 +51,24 @@ public class HospitalSystem {
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character left by nextInt()
 
+
             switch (choice) {
                 case 1:
                     // --- Register Patient ---
+
                     break;
 
                 case 2:
                     // --- Add Service ---
-
+                    String serviceToAdd = scanner.nextLine();
+                    //get price of service
+                    HospitalService service = ServiceFactory.getService(serviceToAdd);
+                    double serviceCost = service != null ? service.getCost() : 0;
+                    //add serviceCost to total cost
                     break;
 
                 case 3:
                     // --- Compute Bill ---
-
                     break;
 
                 case 4:
