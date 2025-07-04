@@ -121,6 +121,7 @@ public class HospitalSystem {
                     String insuranceType = scanner.nextLine().trim().toLowerCase();
                     if(insuranceType.equals("hmo") || insuranceType.equals("cash") || insuranceType.equals("senior")) {
                         PaymentType paymentType = PaymentTypeFactory.getService(insuranceType);
+                        assert paymentType != null;
                         finalBill = paymentType.getCost(finalBill);
                     }
 
@@ -133,7 +134,6 @@ public class HospitalSystem {
 
                         // Get insurance type
 
-                        String insuranceType = "";
                         System.out.print("Enter insurance type (HMO, Senior, Cash): ");
 
                         insuranceType = scanner.nextLine().trim().toLowerCase(); // Read input and normalize
