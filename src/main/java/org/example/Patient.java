@@ -1,11 +1,13 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Patient {
     private String name;
     private String id;
-    private Service[] services;
+    private ArrayList<Service> services;
 
-    public Patient (String name, String id, Service[] services) {
+    public Patient (String name, String id, ArrayList<Service> services) {
         this.name = name;
         this.id = id;
         this.services = services;
@@ -27,11 +29,11 @@ public class Patient {
         this.id = id;
     }
 
-    public Service[] getServices() {
+    public ArrayList<Service> getServices() {
         return services;
     }
 
-    public void setServices(Service[] services) {
+    public void setServices(ArrayList<Service> services) {
         this.services = services;
     }
 }

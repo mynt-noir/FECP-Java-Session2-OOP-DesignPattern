@@ -61,34 +61,12 @@ public class HospitalSystem {
                     System.out.print("Enter patient ID: ");
                     String patientId = scanner.nextLine();
 
-                    Service selectedService = null;
-                    while (selectedService == null) {
-                        System.out.println("\nAvailable Services:");
-                        for (int i = 0; i < services.size(); i++) {
-                            Service s = services.get(i);
-                            System.out.println((i + 1) + ". " + s.getServiceName() + " (Price: " + s.getServicePrice() + ")");
-                        }
-                        System.out.print("Select a service by number: ");
-                        int serviceChoiceNum = -1;
-                        try {
-                            serviceChoiceNum = scanner.nextInt();
-                            scanner.nextLine();
-                            if (serviceChoiceNum > 0 && serviceChoiceNum <= services.size()) {
-                                selectedService = services.get(serviceChoiceNum - 1);
-                            } else {
-                                System.out.println("Invalid service number. Please try again.");
-                            }
-                        } catch (InputMismatchException e) {
-                            System.out.println("Invalid input. Please enter a number.");
-                            scanner.nextLine(); // Clear invalid input
-                        }
-                    }
-
-                    Patient newPatient = new Patient(patientName, patientId, new Service[]{selectedService});
+                    // create a new patient without any initial services.
+                    Patient newPatient = new Patient(patientName, patientId, services);
                     patients.add(newPatient); // Add patient to the list
 
                     System.out.println("\nPatient registered: " + patientName + " (ID: " + patientId + ")");
-                    System.out.println("Service availed: " + selectedService.getServiceName());
+                    // remove service availed, moved to case 2.
                     break;
 
                 case 2:
