@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,21 +46,37 @@ public class HospitalSystemTest {
     }
 
     @Test
-    void computeBillHmo() {
+    public void computeBillHmo() {
+        Patient patient = new Patient("Bob", "P102");
+        patient.addService(new Service("X-Ray", 500));
+        double expected = 500 * 0.60;
+        PaymentType paymentType = PaymentTypeFactory.getService("hmo");
+        Assert.assertNotNull(paymentType);
+        assertEquals(expected, paymentType.getCost(patient.getTotalBill()));
     }
 
     @Test
-    void computeBillCash() {
-
+    public void computeBillCash() {
+        Patient patient = new Patient("Bob", "P102");
+        patient.addService(new Service("X-Ray", 500));
+        double expected = 500;
+        PaymentType paymentType = PaymentTypeFactory.getService("cash");
+        Assert.assertNotNull(paymentType);
+        assertEquals(expected, paymentType.getCost(patient.getTotalBill()));
     }
 
     @Test
-    void computeBillSenior() {
-
+    public void computeBillSenior() {
+        Patient patient = new Patient("Bob", "P102");
+        patient.addService(new Service("X-Ray", 500));
+        double expected = 500 * 0.80;
+        PaymentType paymentType = PaymentTypeFactory.getService("senior");
+        Assert.assertNotNull(paymentType);
+        assertEquals(expected, paymentType.getCost(patient.getTotalBill()));
     }
 
     @Test
-    void validateServiceCost() {
+    public void validateServiceCost() {
         Service xRay = services.getFirst();
         assertEquals("X-Ray", xRay.getServiceName());
         assertEquals(500, xRay.getServicePrice(), 0.001);
